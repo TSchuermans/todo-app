@@ -13,6 +13,8 @@
 /.phpunit.result.cache
 /npm-debug.log
 /yarn-error.log
+/docker/nginx/ssl
+/docker/mariadb/data
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs

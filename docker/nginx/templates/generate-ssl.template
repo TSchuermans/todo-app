@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/ssl/${PROJECT_HOSTNAME}.key" -out "/ssl/${PROJECT_HOSTNAME}.crt" -config /tmp/config-ssl.txt
+openssl x509 -noout -fingerprint -text < "/ssl/${PROJECT_HOSTNAME}.crt" > "/ssl/${PROJECT_HOSTNAME}.info"

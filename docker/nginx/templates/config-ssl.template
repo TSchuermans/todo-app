@@ -1,0 +1,22 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[dn]
+C = ${SSL_COUNTRY_NAME}
+ST = ${SSL_STATE_NAME}
+L = ${SSL_LOCALITY_NAME}
+O = ${SSL_ORGANIZATION_NAME}
+OU = ${SSL_ORGANIZATIONAL_UNIT_NAME}
+emailAddress = ${SSL_EMAIL_ADDRESS}
+CN = ${PROJECT_HOSTNAME}
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = *.${PROJECT_HOSTNAME}
+DNS.2 = ${PROJECT_HOSTNAME}

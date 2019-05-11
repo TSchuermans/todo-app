@@ -1,0 +1,74 @@
+version: '3.7'
+
+services:
+
+  mariadb:
+    hostname: ${MARIADB_HOSTNAME}
+    container_name: ${PROJECT_NAME}_mariadb
+    build:
+      context: ./docker/mariadb
+      args:
+        mariadb_version: ${MARIADB_VERSION}
+    restart: always
+    volumes:
+      - ./docker/mariadb/data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MARIADB_DATABASE}
+      - MYSQL_USER=${MARIADB_USERNAME}
+      - MYSQL_PASSWORD=${MARIADB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    networks:
+      - backend
+
+  php:
+    hostname: ${PROJECT_NAME}_php
+    container_name: ${PROJECT_NAME}_php
+    build:
+      context: ./docker/php
+      args:
+        php_version: ${PHP_VERSION}
+    restart: always
+    volumes:
+      - ./:/var/www/vhosts/${PROJECT_HOSTNAME}
+    depends_on:
+      - mariadb
+    networks:
+      - backend
+      - frontend
+    environment:
+      - VIRTUAL_HOST=${PROJECT_HOSTNAME}
+
+  nginx:
+    hostname: ${PROJECT_NAME}_nginx
+    container_name: ${PROJECT_NAME}_nginx
+    build:
+      context: ./docker/nginx
+      args:
+        nginx_version: ${NGINX_VERSION}
+        project_name: ${PROJECT_NAME}
+        project_hostname: ${PROJECT_HOSTNAME}
+        app_env: ${APP_ENV}
+        app_secret: ${APP_SECRET}
+        ssl_country_name: ${SSL_COUNTRY_NAME}
+        ssl_state_name: ${SSL_STATE_NAME}
+        ssl_locality_name: ${SSL_LOCALITY_NAME}
+        ssl_organization_name: ${SSL_ORGANIZATION_NAME}
+        ssl_organizational_unit_name: ${SSL_ORGANIZATIONAL_UNIT_NAME}
+        ssl_email_address: ${SSL_EMAIL_ADDRESS}
+    volumes:
+      - ./:/var/www/vhosts/${PROJECT_HOSTNAME}
+      - ./docker/nginx/ssl:/ssl
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
+      - "${NGINX_HOST_HTTPS_PORT}:443"
+    depends_on:
+      - php
+    networks:
+      - frontend
+    command: /bin/bash -c "/tmp/generate-ssl.sh && exec nginx -g 'daemon off;'"
+
+networks:
+  frontend:
+    name: frontend
+  backend:
+    name: backend
