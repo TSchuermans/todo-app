@@ -1,0 +1,25 @@
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        server_version: '5.7'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+        dbname: '%env(resolve:MARIADB_DATABASE)%'
+        host: '%env(resolve:MARIADB_HOSTNAME)%'
+        port: '%env(resolve:MARIADB_PORT)%'
+        user: '%env(resolve:MARIADB_USERNAME)%'
+        password: '%env(resolve:MARIADB_PASSWORD)%'
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
