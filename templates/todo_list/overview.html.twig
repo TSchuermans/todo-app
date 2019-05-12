@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>todo.app</h1>
+    {{ form_start(todoListItemForm) }}
+        <div class="flex items-center border-b border-b-2 border-teal py-2">
+            {{ form_widget(todoListItemForm.title) }}
+            {{ form_widget(todoListItemForm.submit)}}
+        </div>
+    {{ form_end(todoListItemForm) }}
+    {% if todoListItems.count is not same as(0) %}
+        <ul class="mt-3">
+            {% for todoListItem in todoListItems %}
+                <li class="mt-2"><a href="{{ url('todo-list.toggle-item', { id : todoListItem.id }) }}" class="todo-list-item{% if todoListItem.completedAt %}-done{% endif %}">{{ todoListItem.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

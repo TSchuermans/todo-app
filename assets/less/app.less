@@ -60,3 +60,28 @@
  * @import "utilities/background-patterns";
  * @import "utilities/skew-transforms";
  */
+
+a.todo-list-item
+{
+    color: inherit;
+    text-decoration: none;
+
+    &:hover
+    {
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+}
+
+a.todo-list-item-done
+{
+    color: inherit;
+    font-weight: bold;
+    text-decoration: line-through;
+
+    &:hover
+    {
+        font-weight: normal;
+        text-decoration: none;
+    }
+}

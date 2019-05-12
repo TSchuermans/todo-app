@@ -43,7 +43,6 @@ class TodoList
     public static function create(string $title): self
     {
         $instance = new static();
-        $instance->id = Uuid::uuid4();
         $instance->title = $title;
         $instance->createdAt = new \DateTimeImmutable();
 
@@ -84,11 +83,6 @@ class TodoList
         return $this;
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType
-     *
-     * @return Collection|TodoListItem[]
-     */
     public function getTodoListItems(): Collection
     {
         return $this->todoListItems;

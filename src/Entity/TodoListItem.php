@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -38,10 +39,31 @@ class TodoListItem
     private $completedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TodoList", inversedBy="todoListItems")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\TodoList",
+     *     inversedBy="todoListItems",
+     *     cascade={"persist","remove"}
+     * )
      * @ORM\JoinColumn(nullable=false)
      */
     private $todoList;
+
+    public static function create(string $title): self
+    {
+        $instance = new static();
+        $instance->title = $title;
+        $instance->createdAt = new \DateTimeImmutable();
+
+        return $instance;
+    }
+
+    public static function createEmpty(): self
+    {
+        $instance = new static();
+        $instance->createdAt = new \DateTimeImmutable();
+
+        return $instance;
+    }
 
     public function getId(): ?UuidInterface
     {
@@ -94,5 +116,16 @@ class TodoListItem
         $this->todoList = $todoList;
 
         return $this;
+    }
+
+    public function toggle(): void
+    {
+        if ($this->getCompletedAt() instanceof \DateTimeImmutable) {
+            $this->completedAt = null;
+
+            return;
+        }
+
+        $this->completedAt = new \DateTimeImmutable();
     }
 }

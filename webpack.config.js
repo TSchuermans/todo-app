@@ -12,6 +12,7 @@ Encore
 
     .enableLessLoader()
     .enablePostCssLoader()
+    .enableSingleRuntimeChunk()
 ;
 
 module.exports = Encore.getWebpackConfig();

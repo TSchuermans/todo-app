@@ -27,6 +27,7 @@
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <file name="src/Entity/TodoList.php" />
+                <file name="src/Controller/TodoListController.php" />
             </errorLevel>
         </PropertyNotSetInConstructor>
         

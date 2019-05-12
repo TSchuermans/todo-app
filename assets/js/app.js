@@ -11,4 +11,25 @@ require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+window.onload = function () {
+    const todoListItems = document.querySelectorAll('.todo-list-item');
+
+    todoListItems.forEach(
+        (todoListItem) => {
+            todoListItem.onclick = (event) => {
+                event.target.classList.toggle('todo-list-item-done');
+                event.target.classList.toggle('todo-list-item');
+
+                const request = new XMLHttpRequest();
+
+                request.open("get", event.target.href, true);
+                request.send();
+
+                event.stopPropagation();
+                event.preventDefault();
+
+                return false;
+            }
+        }
+    );
+};

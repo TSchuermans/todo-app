@@ -4,7 +4,7 @@
         "autoprefixer": "^9.5.1",
         "core-js": "^3.0.0",
         "less": "^3.9.0",
-        "less-loader": "^5.0.0",
+        "less-loader": "^4.1.0",
         "postcss-loader": "^3.0.0",
         "tailwindcss": "^0.7.4",
         "webpack-notifier": "^1.6.0"
