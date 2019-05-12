@@ -1,8 +1,9 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-                           ->notPath('config/bootstrap.php')
-                           ->notPath('public/index.php')
+                           ->notPath(__DIR__ . DIRECTORY_SEPARATOR . 'config/bootstrap.php')
+                           ->notPath(__DIR__ . DIRECTORY_SEPARATOR . 'public/index.php')
+                           ->exclude('Migrations')
                            ->in(
                                [
                                    __DIR__ . DIRECTORY_SEPARATOR . 'bin',
@@ -24,4 +25,4 @@ return PhpCsFixer\Config::create()
                             ]
                         )
                         ->setFinder($finder)
-;
+    ;

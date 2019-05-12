@@ -9,10 +9,27 @@
 
             <file name="config/bootstrap.php"/>
             <file name="src/Kernel.php"/>
+            <directory name="src/Migrations"/>
             <directory name="vendor"/>
 
         </ignoreFiles>
 
     </projectFiles>
+
+    <issueHandlers>
+
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <file name="src/Entity/TodoListItem.php" />
+            </errorLevel>
+        </MissingConstructor>
+
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <file name="src/Entity/TodoList.php" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        
+    </issueHandlers>
 
 </psalm>
