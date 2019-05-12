@@ -1,9 +1,9 @@
 # TODO app setup (OSX)
-## hosts file
+## 1. setup hosts file
 ```
 echo "127.0.0.1 todo.app" | sudo tee -a /etc/hosts
 ```
-## docker
+## 2. setup docker
 ```
 # als docker nog niet installed is
 brew update
@@ -14,7 +14,12 @@ brew cleanup
 # als docker installed is
 docker-compose up -d
 ```
-## trust self-signed certificate
+## 3. setup self-signed certificate
 ```
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain docker/nginx/ssl/todo.app.crt
+```
+## 4. relax
+```
+the php container waits on mariadb to be available.
+use docker-compose logs -f to check on progress
 ```

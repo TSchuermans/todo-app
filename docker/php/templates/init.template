@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cd /var/www/vhosts/${PROJECT_HOSTNAME}
+
+composer install
+./bin/console doctrine:migrations:migrate --allow-no-migration --no-interaction
+./bin/console doctrine:fixtures:load --no-interaction
+
+php-fpm

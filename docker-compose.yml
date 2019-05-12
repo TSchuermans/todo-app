@@ -27,6 +27,7 @@ services:
       context: ./docker/php
       args:
         php_version: ${PHP_VERSION}
+        project_hostname: ${PROJECT_HOSTNAME}
     restart: always
     volumes:
       - ./:/var/www/vhosts/${PROJECT_HOSTNAME}
@@ -37,6 +38,7 @@ services:
       - frontend
     environment:
       - VIRTUAL_HOST=${PROJECT_HOSTNAME}
+    command: /bin/bash -c "/tmp/wait-for.sh --timeout=300 ${MARIADB_HOSTNAME}:3306 -- /tmp/init.sh"
 
   nginx:
     hostname: ${PROJECT_NAME}_nginx
