@@ -15,6 +15,7 @@
 /yarn-error.log
 /docker/nginx/ssl
 /docker/mariadb/data
+/bin/
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
