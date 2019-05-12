@@ -39,3 +39,6 @@ RUN envsubst '${PROJECT_HOSTNAME},${PROJECT_NAME},${APP_ENV},${APP_SECRET}' < /t
 RUN cp -f /tmp/vhost.conf /etc/nginx/conf.d/default.conf
 
 RUN chmod +x /tmp/generate-ssl.sh
+
+ENV TZ=Europe/Brussels
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
