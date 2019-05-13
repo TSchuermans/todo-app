@@ -15,7 +15,7 @@ class TodoListFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $todoList = TodoList::create('Automanager');
+        $todoList = TodoList::create('todo.app');
         $todoListItem = TodoListItem::create(self::TODO_ITEM_TITLE);
 
         $todoList->addTodoListItem($todoListItem);
