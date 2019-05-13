@@ -9,7 +9,7 @@ use App\Repository\TodoListItemRepository;
 use App\Repository\TodoListRepository;
 use Doctrine\Common\Collections\Collection;
 
-class TodoListService
+class TodoListItemService
 {
     /** @var TodoListRepository */
     private $todoListRepository;

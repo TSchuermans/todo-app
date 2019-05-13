@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<psalm totallyTyped="false" useDocblockTypes="true">
+<psalm totallyTyped="false" useDocblockTypes="true" errorBaseline="baseline.xml">
 
     <projectFiles>
 
@@ -10,6 +10,7 @@
             <file name="config/bootstrap.php"/>
             <file name="src/Kernel.php"/>
             <directory name="src/Migrations"/>
+            <directory name="tests"/>
             <directory name="vendor"/>
 
         </ignoreFiles>

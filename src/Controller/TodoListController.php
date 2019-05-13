@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\TodoListItem;
 use App\Form\TodoListItemType;
-use App\Service\TodoListService;
+use App\Service\TodoListItemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TodoListController extends AbstractController
 {
-    /** @var TodoListService */
+    /** @var TodoListItemService */
     private $todoListService;
 
-    public function __construct(TodoListService $todoListService)
+    public function __construct(TodoListItemService $todoListService)
     {
         $this->todoListService = $todoListService;
     }
@@ -67,7 +67,7 @@ class TodoListController extends AbstractController
         return $this->redirectToRoute('todo-list.overview');
     }
 
-    public function getTodoListService(): TodoListService
+    public function getTodoListService(): TodoListItemService
     {
         return $this->todoListService;
     }
